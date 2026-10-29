@@ -1,0 +1,257 @@
+/* This Contains custom style, interactive hover states, button colors and UI overrides */
+
+/* Body is the Global style */
+body {
+    background-color: #141414;
+    color: white;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    overflow-x: hidden; /* Prevents horizontal scrolling issues on mobile */
+}
+
+/* uses a linear gradient overlay to smoothly blend the hero image into the darkbackground */
+.hero-section {
+    height: 80vh;
+    background-image: linear-gradient(to bottom, rgba(20,20,20,0) 40%, #141414 100%), url('Images/hero-background.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 4rem;
+}
+
+/* Project Cards */
+.project-card-interactive {
+    position: relative;
+    width: 100%;
+    /* Forces a perfect 16:9 aspect ratio for all project THUMBNAILS */
+    aspect-ratio: 16 / 9;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: #000;
+}
+
+/* background image starts slightly zoomed in and blurred*/
+.project-card-interactive .thumbnail-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.05);
+    transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+.project-card-interactive .thumbnail-bg.has-blur {
+    filter: blur(8px);
+}
+
+/* Title image perfectly centered over the blurred background */
+.project-card-interactive .thumbnail-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%; 
+    pointer-events: none; 
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
+
+/* This is hover state , so when the user hovers over a thumbnail, it zooms in,*/
+.project-card-interactive:hover .thumbnail-bg {
+    transform: scale(1.1);
+}
+
+/* Removes the blur, */
+.project-card-interactive:hover .thumbnail-bg.has-blur {
+    filter: blur(0px);
+}
+
+/* and hides the title */
+.project-card-interactive:hover .thumbnail-title {
+    opacity: 0;
+}
+
+/* this is spacing */
+.swiper {
+    padding-bottom: 2rem;
+}
+
+main h5 {
+    margin-top: 1rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+}
+
+/* this is the back to top button */
+#backToTopBtn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1050;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 24px;
+    opacity: 0;
+    visibility: hidden; 
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.2s ease;
+}
+
+#backToTopBtn.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+#backToTopBtn:hover {
+    transform: scale(1.1);
+}
+
+/* swiper carousel overrides , it customizes the default arrows to look like a solid
+ * , circular UI buttons*/
+.swiper-button-next, 
+.swiper-button-prev {
+    color: #141414;
+    background-color: rgba(255, 255, 255, 0.85);
+    width: 45px; 
+    height: 45px;
+    border-radius: 66%;
+    top: 35%; 
+    transform: translateY(-25%);
+    margin-top: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+}
+
+.swiper-button-prev { left: 10px; }
+.swiper-button-next { right: 10px; }
+
+/* this is saying "please ONLY show the swiper arrows when HOVERING over the row" */
+.swiper:hover .swiper-button-next:not(.swiper-button-disabled),
+.swiper:hover .swiper-button-prev:not(.swiper-button-disabled) {
+    opacity: 1;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    background-color: rgba(255, 255, 255, 1);
+    transform: translateY(-25%) scale(1.15);
+}
+/* and this "Hide the arrow completely if there is no more slides to scroll to" */
+.swiper-button-next.swiper-button-disabled,
+.swiper-button-prev.swiper-button-disabled {
+    opacity: 0 !important;
+    pointer-events: none;
+}
+
+.swiper-button-next::after, 
+.swiper-button-prev::after {
+    font-size: 14px; 
+    font-weight: 900;
+}
+
+/* Button customizations, used everywhere */
+.btn-itch {
+    background-color: #fa5c5c;
+    color: white;
+    border: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-itch:hover {
+    background-color: #e34b4b;
+    color: white;
+    transform: scale(1.05);
+}
+
+.btn-github {
+    background-color: #24292e;
+    color: white;
+    border: 1px solid #444d56;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-github:hover {
+    background-color: #1b1f23;
+    color: white;
+    transform: scale(1.05);
+}
+
+.btn-instagram {
+    background-color: #E1306C;
+    color: white;
+    border: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-instagram:hover {
+    background-color: #C13584;
+    color: white;
+    transform: scale(1.05);
+}
+
+.btn-x {
+    background-color: #000000;
+    color: white;
+    border: 1px solid #333333;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-x:hover {
+    background-color: #1a1a1a;
+    color: white;
+    transform: scale(1.05);
+}
+
+.btn-bluesky {
+    background-color: #0085ff;
+    color: white;
+    border: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-bluesky:hover {
+    background-color: #0073de;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* This is carousel UI, this customizes the modal arrows to match the swiper arrows */
+#modalCarousel .carousel-control-prev,
+#modalCarousel .carousel-control-next {
+    width: 45px;
+    height: 45px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 50%;
+    opacity: 0.8;
+    margin: 0 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    transition: opacity 0.3s ease, transform 0.2s ease, background-color 0.2s ease;
+}
+
+#modalCarousel .carousel-control-prev:hover,
+#modalCarousel .carousel-control-next:hover {
+    background-color: rgba(255, 255, 255, 1);
+    opacity: 1;
+    transform: translateY(-50%) scale(1.15);
+}
+
+#modalCarousel .carousel-control-prev-icon,
+#modalCarousel .carousel-control-next-icon {
+    filter: invert(1); /* Flips the default white to black */
+    width: 1.5rem;
+    height: 1.5rem;
+}
+#contact {
+    background-color: #050505;
+    border-top: 1px solid #2a2a2a;
+    padding-top: 4rem; 
+    padding-bottom: 1rem;
+    margin-top: 11rem;
+}
